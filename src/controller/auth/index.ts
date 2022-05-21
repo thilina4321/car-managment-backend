@@ -1,4 +1,4 @@
-import { signup, updateUser, createAdminUser, findUserAndCar, findUsers } from "./sign-up";
+import { signup, updateUser, createAdminUser, findUserAndCar,adminLogin, findUsers } from "./sign-up";
 import { signIn } from "./sign-in";
 import { currentUser } from "./current-user";
 import jwt from "jsonwebtoken";
@@ -19,5 +19,5 @@ export {
   refreshToken,
   tokenExpiresIn,
   refreshTokenExpiresIn,
-  updateUser, createAdminUser, findUserAndCar,findUsers
+  updateUser, createAdminUser, findUserAndCar,findUsers,adminLogin
 };

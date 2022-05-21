@@ -35,6 +35,16 @@ export const updateUser = async (req: Request, res: Response) => {
   res.status(201).send({ existingUser });
 };
 
+export const adminLogin = async (req: Request, res: Response) => {
+  const { password, email } = req.body;
+
+  if (email != "admin@car.com" || password != "admin1234") {
+    throw new BadRequest("Email or password wrong");
+  }
+
+  res.status(200).send({ data : email, success:true });
+};
+
 export const createAdminUser = async (req: Request, res: Response) => {
   const { email, password, firstName, secondName ,  vehicleName,
     price,
