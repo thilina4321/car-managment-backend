@@ -7,7 +7,7 @@ const dbConnectionUrl = process.env.DB_CONNECTION_URL || "mongodb://127.0.0.1:27
 connect(dbConnectionUrl)
   .then(() => {
     app.listen(port, () => {
-      console.log("application starts with port ", port);
+      console.log("application starts with ports ", port);
     });
   })
   .catch(() => console.log("unable to connect to the db"));
