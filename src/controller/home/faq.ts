@@ -3,10 +3,9 @@ import { Request, Response } from "express";
 import { findDataByIdHelper } from "../common";
 
 export const getHomeFaqs = async (_: Request, res: Response) => {
-  const data = await Faq.find();
   res.status(200).send({
     success: true,
-    data,
+    data :[],
     message: "faqs fetch successfully",
   });
 };

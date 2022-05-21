@@ -13,7 +13,7 @@ import { body } from "express-validator";
 
 const router = express.Router();
 
-router.get("/home/faqs", validateRequest, getHomeFaqs);
+router.get("/home/faqs", getHomeFaqs);
 router.get("/home/faqs/:question", getSingleFaq);
 
 router.post(
