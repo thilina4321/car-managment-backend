@@ -1,11 +1,11 @@
-import { DoctorNote } from "../../model/about/doctors-note";
+import {  Car } from "../../model/car";
 import { Request, Response } from "express";
 import { findDataByIdHelper } from "../common";
 
-const commonName = "doctor's notes";
+const commonName = "car";
 
-export const getDoctorsNotes = async (_: Request, res: Response) => {
-  const stocks = await DoctorNote.find();
+export const getCars = async (_: Request, res: Response) => {
+  const stocks = await Car.find();
   
   res.status(200).send({
     success: true,
@@ -15,11 +15,25 @@ export const getDoctorsNotes = async (_: Request, res: Response) => {
 
 
 export const addDoctorsNotes = async (req: Request, res: Response) => {
-  const { name, note, position } = req.body;
-  const createModelData = DoctorNote.build({
-    name,
-    note,
-    position
+  const { vehicleName,
+    price,
+    year,
+    transmission,
+    ac,
+    seats,
+    image,     description,fuelType
+  } = req.body;
+  const createModelData = Car.build({
+    vehicleName,
+    price,
+    year,
+    transmission,
+    ac,
+    seats,
+    image,
+    description,fuelType,
+    userId : ''
+
   });
 
   const data = await createModelData.save();
@@ -34,12 +48,10 @@ export const updateDoctorNote = async (req: Request, res: Response) => {
   const { id } = req.params;
   const bodyData = req.body;
 
-  const data = await findDataByIdHelper(id, DoctorNote, commonName);
+  const data = await findDataByIdHelper(id, Car, commonName);
 
   await data?.set({
-    name: bodyData["name"],
-    note: bodyData["note"],
-    position: bodyData["position"],
+    ...bodyData
   });
 
   await data?.save();
@@ -53,8 +65,8 @@ export const updateDoctorNote = async (req: Request, res: Response) => {
 
 export const deleteDoctorNote = async (req: Request, res: Response) => {
   const { id } = req.params;
-  await findDataByIdHelper(id, DoctorNote, commonName);
-  await DoctorNote.findByIdAndDelete(id);
+  await findDataByIdHelper(id, Car, commonName);
+  await Car.findByIdAndDelete(id);
 
   res.status(200).send({
     success: true,
@@ -66,7 +78,7 @@ export const deleteDoctorNote = async (req: Request, res: Response) => {
 
 export const searchCarsByType = async (req: Request, res: Response) => {
     const { types } = req.params;
-    const cars = await findDataByIdHelper(types, DoctorNote, commonName);
+    const cars = await findDataByIdHelper(types, Car, commonName);
   
     res.status(200).send({
       success: true,

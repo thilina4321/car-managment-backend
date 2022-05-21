@@ -15,7 +15,7 @@ export const addLoveToCar = async (req: Request, res: Response) => {
       success: true,
       data: car,
       message: `search ${commonName} successfully`,
-    });
+    }); 
   };
 
   export const featuredCars = async (req: Request, res: Response) => {
