@@ -45,6 +45,14 @@ export const adminLogin = async (req: Request, res: Response) => {
   res.status(200).send({ data : email, success:true });
 };
 
+export const deleteUser = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  const user = await User.findByIdAndDelete(id)
+
+  res.status(200).send({ data : user, success:true });
+};
+
 export const createAdminUser = async (req: Request, res: Response) => {
   const { email, password, firstName, secondName ,  vehicleName,
     price,
