@@ -5,13 +5,14 @@ interface UserAttrs {
     vehicleName: string;
     year: string;
     image: string;
-    price: string;
+    price: number;
     description: string;
     transmission: string;
     fuelType: string;
     seats: string;
     ac: string;
-    userId: string
+    fav : [];
+    booked : boolean;
     
 }
 
@@ -25,13 +26,15 @@ interface UserDoc extends mongoose.Document {
     vehicleName: string;
     year: string;
     image: string;
-    price: string;
+    price: number;
     description: string;
     transmission: string;
     fuelType: string;
     seats: string;
     ac: string;
-    userId: string
+    fav : [];
+    booked : boolean;
+
 
 }
 
@@ -40,13 +43,15 @@ const faq = new Schema(
     vehicleName: String,
     year: String,
     image: String,
-    price: String,
+    price: Number,
     description: String,
     transmission: String,
     fuelType: String,
     seats: String,
     ac: String,
-    userId : { type : Schema.Types.ObjectId, ref :'user' }
+    fav : [],
+    booked : Boolean,
+
   },
   {
     toJSON: {

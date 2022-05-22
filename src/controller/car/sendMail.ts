@@ -8,8 +8,8 @@ export const sendMail = async  (req: Request, res: Response) => {
     port: "587",
     secure: false,
     auth: {
-        user: 'sampathbankinfor@gmail.com', // generated ethereal user
-        pass: 'eivpabomlwxmzyjl', // generated ethereal password
+        user: 'dsrentcars@gmail.com', // generated ethereal user
+        pass: 'pwpwljyqznnpdwji', // generated ethereal password
       },
   };
 
@@ -24,7 +24,7 @@ export const sendMail = async  (req: Request, res: Response) => {
   });
 
   const mailInfo = await transporter.sendMail({
-    from: 'sampathbankinfor@gmail.com',
+    from: 'Car Management System',
     to: email,
     subject: subject,
     text: text,

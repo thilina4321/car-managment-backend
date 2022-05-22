@@ -54,7 +54,7 @@ export const deleteUser = async (req: Request, res: Response) => {
 };
 
 export const createAdminUser = async (req: Request, res: Response) => {
-  const { email, password, firstName, secondName ,  vehicleName,
+  const {  vehicleName,
     price,
     year,
     transmission,
@@ -62,36 +62,28 @@ export const createAdminUser = async (req: Request, res: Response) => {
     seats,
     image,
     description,
-    fuelType} = req.body;
-
-  const existingUser = await User.findOne({ email: email });
-
-  if (existingUser) {
-    throw new BadRequest("This email is used");
-  }
-
-  const hashPw = await hash(password, 8);
-  const createData = User.build({ email: email, password: hashPw, secondName, firstName });
-  const user = await createData.save();
-
+    fuelType,
+    fav
+  } = req.body;
 
   const createCarData = Car.build({
     vehicleName,
-    price,
+    price:+price,
     year,
     transmission,
     ac,
     seats,
     image,
     description,fuelType,
-    userId : user._id
+    fav,
+    booked:false,
  
   });
 
-  const data = await createCarData.save();
+  const car = await createCarData.save();
 
   
-  res.status(201).send({ user, car :data , success:true});
+  res.status(201).send({  car , success:true});
 };
 
 
@@ -103,12 +95,11 @@ export const findUserAndCar = async (req: Request, res: Response) => {
   if (!user) {
     throw new BadRequest("No user found");
   }
-
-
-  const car = await Car.findOne({userId : id})
   
-  res.status(201).send({ user, car , success:true});
+  res.status(201).send({ user , success:true});
 };
+
+
 
 export const findUsers = async (req: Request, res: Response) => {
 

@@ -19,6 +19,7 @@ import { contactRouter } from "./router/contact/contact-router";
 import { contactQueryRouter } from "./router/contact/query-router";
 import { fotterRouter } from "./router/fotter/fotter";
 import { brandRouter } from "./router/brand";
+import { bookedRouter } from "./router/booked";
 
 app.use(express.json());
 app.use(cors());
@@ -36,6 +37,7 @@ app.use(contactQueryRouter);
 app.use(fotterRouter);
 app.use(youMayLikeRouter);
 app.use(brandRouter);
+app.use(bookedRouter);
 
 app.all("*", () => {
   throw new NotFoundError();

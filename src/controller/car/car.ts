@@ -1,6 +1,7 @@
 import {  Car } from "../../model/car";
 import { Request, Response } from "express";
 import { findDataByIdHelper } from "../common";
+import { BadRequest } from "../../error";
 
 const commonName = "car";
 
@@ -13,6 +14,38 @@ export const getCars = async (_: Request, res: Response) => {
   });
 };
 
+export const deleteCar = async (req: Request, res: Response) => {
+  const {id} = req.params
+  const car = await Car.findByIdAndDelete(id);
+  
+  res.status(200).send({
+    success: true,
+    data: car,
+  });
+};
+
+export const getOneCar = async (req: Request, res: Response) => {
+  const {id} = req.params
+  const car = await Car.findById(id);
+  
+  res.status(200).send({
+    success: true,
+    data: car,
+  });
+};
+
+export const findCar = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  const car = await Car.findById(id)
+
+  if (!car) {
+    throw new BadRequest("No car found");
+  }
+  
+  res.status(201).send({  car , success:true});
+};
+
 
 export const addDoctorsNotes = async (req: Request, res: Response) => {
   const { vehicleName,
@@ -21,18 +54,17 @@ export const addDoctorsNotes = async (req: Request, res: Response) => {
     transmission,
     ac,
     seats,
-    image,     description,fuelType
+    image,     description,fuelType,fav
   } = req.body;
   const createModelData = Car.build({
     vehicleName,
-    price,
+    price : +price,
     year,
     transmission,
     ac,
     seats,
     image,
-    description,fuelType,
-    userId : ''
+    description,fuelType,fav, booked:false
 
   });
 

@@ -19,7 +19,7 @@ router.post(
 router.get("/users/current-user", currentUser);
 
 router.post("/users/refresh-token", requireAuth, refreshToken);
-router.post("/users/create-user-and-car", createAdminUser);
+router.post("/users/create-car", createAdminUser);
 router.get("/users/find-user-and-car/:id", findUserAndCar);
 router.get("/users/find-users", findUsers);
 router.post("/users/update-user", updateUser);
