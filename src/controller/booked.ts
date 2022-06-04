@@ -27,7 +27,7 @@ export const getUseBooked = async (req: Request, res: Response) => {
 
 
 export const addBooked = async (req: Request, res: Response) => {
-  const { userId,carId } = req.body;
+  const { userId,carId, days } = req.body;
   const user = await User.findById(userId)
   const car = await Car.findById(carId);
 
@@ -36,7 +36,7 @@ export const addBooked = async (req: Request, res: Response) => {
     carId,
     userName : user!.firstName,
     carName: car!.vehicleName,
-    price : car!.price,
+    price : car!.price * days,
     date : new Date().toString()
   });
 
@@ -55,13 +55,21 @@ export const addBooked = async (req: Request, res: Response) => {
 
 
 export const deleteBooked = async (req: Request, res: Response) => {
-  const { id } = req.params;
+  const { id , carId} = req.params;
   await Booked.findByIdAndDelete(id);
+  const car = await Car.findById(carId)
+
+  car?.set({
+    booked: false,
+  });
+
+  await car?.save();
+
 
   res.status(200).send({
     success: true,
     data: null,
-    message: "delete faq successfully",
+    message: "delete booked successfully",
   });
 };
 
