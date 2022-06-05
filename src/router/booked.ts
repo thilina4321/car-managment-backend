@@ -19,7 +19,7 @@ router.get("/cars/booked/:id", getUseBooked);
 router.post("/cars/booked", addBooked);
 router.get("/cars/available", availableCars);
 router.get("/cars/booked/:id", bookedCarByUser);
-router.delete("/cars/booked/:id", deleteBooked);
+router.delete("/cars/booked/:id/:carId", deleteBooked);
 router.get("/cars/recommanded", recommanded);
 router.post("/cars/make-fav", makeCarFav);
 router.get("/cars/fav-list", favouriteCars);
